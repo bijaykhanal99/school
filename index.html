@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - North Point Academy</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --dark: #1e293b;
+            --bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .school-logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .school-name {
+            margin: 0;
+            color: var(--dark);
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .school-address {
+            margin: 5px 0 25px 0;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:disabled {
+            background-color: #f1f5f9;
+            color: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .error-msg {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            display: none;
+            background: #fee2e2;
+            padding: 8px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <!-- School Branding -->
+        <img src="logo.jpg" alt="Logo" class="school-logo">
+        <h2 class="school-name">NORTH POINT ACADEMY</h2>
+        <p class="school-address">Pattharkot, Kapilvastu, Nepal</p>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Academy Name</label>
+                <input type="text" value="North Point Academy" disabled>
+            </div>
+
+            <div class="form-group">
+                <label>Password (Mobile Number)</label>
+                <input type="password" id="password" placeholder="Enter your registered number" required>
+            </div>
+
+            <button type="submit" class="login-btn">Login to Portal</button>
+            <p id="error" class="error-msg">
+                <i class="fas fa-exclamation-circle"></i> Invalid credentials. Use your registered mobile number.
+            </p>
+        </form>
+    </div>
+
+    <!-- Data Sources -->
+    <script src="studentdata.js"></script>
+    <script src="staff.js"></script>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const passInput = document.getElementById('password').value;
+            const errorElement = document.getElementById('error');
+            
+            // Check both data files for a matching phone number
+            const user = students.find(s => s.phone === passInput) || 
+                         staffMembers.find(s => s.phone === passInput);
+
+            if (user) {
+                // Save name to session so the Home page can say "Hello, [Name]"
+                sessionStorage.setItem('loggedInUser', user.name);
+                
+                // Clear any error styling
+                errorElement.style.display = "none";
+                
+                // Redirect to main page (Change to index.html if that is your filename)
+                window.location.href = "home.html"; 
+            } else {
+                // Show error message
+                errorElement.style.display = "block";
+                document.getElementById('password').style.borderColor = "#ef4444";
+            }
+        });
+    </script>
+
+</body>
+</html>

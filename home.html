@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>North Point Academy</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image" href="logo.jpg">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #818cf8;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --accent: #fbbf24;
+            --white: #ffffff;
+            /* Social Brand Colors */
+            --whatsapp: #25d366;
+            --facebook: #1877f2;
+            --tiktok: #000000;
+   --youtube: #ff0000;        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--light); color: #334155; line-height: 1.6; }
+
+        /* --- NAVBAR --- */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 12px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo-group { display: flex; flex-direction: column; }
+        .logo { font-size: 24px; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .nepali-meta { 
+            font-size: 12px; 
+            font-weight: 700; 
+            color: #64748b; 
+            background: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 6px;
+            margin-top: 5px;
+            display: inline-block;
+            border: 1px solid #e2e8f0;
+        }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--dark); 
+            font-weight: 600; 
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a i { font-size: 16px; color: var(--secondary); transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); transform: translateY(-3px); }
+        .nav-links a:hover i { color: var(--primary); }
+
+        .btn-portal { background: var(--primary); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 14px; transition: 0.3s; border: none; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3); }
+        .btn-portal:hover { background: var(--dark); transform: scale(1.05); }
+
+        /* --- HERO --- */
+        .hero { 
+            padding: 100px 6% 60px; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            align-items: center; 
+            gap: 40px; 
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+        }
+        .hero-text h1 { font-size: 52px; color: var(--dark); line-height: 1.2; margin-bottom: 20px; }
+        .hero-text h1 span { color: var(--primary); position: relative; }
+        .hero-text p { font-size: 18px; color: #64748b; margin-bottom: 30px; max-width: 500px; }
+        .hero-img { width: 100%; border-radius: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.12); animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* --- NOTICE MODAL --- */
+        #notice-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.4s;
+        }
+        #notice-modal.active { visibility: visible; opacity: 1; }
+        .modal-content { 
+            background: white; 
+            padding: 40px; 
+            border-radius: 30px; 
+            max-width: 500px; 
+            width: 90%; 
+            text-align: center; 
+            position: relative; 
+            border-top: 10px solid var(--accent);
+        }
+        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; color: #94a3b8; }
+
+        /* --- DASHBOARD --- */
+        .dashboard { padding: 80px 6%; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: -50px; }
+        .stat-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.4s;
+            position: relative;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+        }
+        .logo img {
+    height: 45px; /* Adjust based on your logo design */
+    width: auto;
+    border-radius: 8px; /* Optional: adds a soft look to square logos */
+    object-fit: contain;
+}
+        .stat-card:hover { transform: translateY(-10px); }
+        .stat-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; filter: brightness(0.5); }
+        .stat-info { position: relative; z-index: 2; color: white; }
+        .stat-info i { font-size: 32px; color: var(--accent); margin-bottom: 10px; }
+        .stat-info h3 { font-size: 36px; font-weight: 800; }
+
+        /* --- ABOUT --- */
+        .about { padding: 100px 6%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .about-image-stack { position: relative; }
+        .about-main-img { width: 100%; border-radius: 30px; }
+        .about-badge { 
+            position: absolute; 
+            bottom: -20px; 
+            right: -20px; 
+            background: var(--white); 
+            padding: 20px; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        /* --- CONTACT & SOCIAL --- */
+        .contact { padding: 100px 6%; background: var(--white); display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
+        .social-flex { display: flex; gap: 15px; margin-top: 30px; }
+        .social-circle {
+            width: 55px;
+            height: 55px;
+            border-radius: 16px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+    
+        .social-circle.wa:hover { background: var(--whatsapp); color: white; transform: translateY(-10px) rotate(10deg); }
+        .social-circle.fb:hover { background: var(--facebook); color: white; transform: translateY(-10px) rotate(-10deg); }
+        .social-circle.tt:hover { background: var(--tiktok); color: white; transform: translateY(-10px) rotate(10deg); }
+     .social-circle.yt:hover { 
+    background: var(--youtube); 
+    color: white; 
+    transform: translateY(-10px) rotate(-10deg); 
+}
+
+        /* --- FOOTER --- */
+        footer { background: var(--dark); color: #94a3b8; padding: 80px 6% 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 18px; }
+        .footer-col h4 i {
+    margin-right: 10px;
+    color: #ffd700; /* Optional: adds a gold color to your icons */
+}
+
+.footer-col p i {
+    margin-right: 8px;
+    width: 20px; /* Keeps icons aligned vertically */
+    text-align: center;
+}
+
+.footer-col p a:hover {
+    opacity: 0.8;
+    text-decoration: underline !important;
+}
+
+.social-icons {
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+        .copyright { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; }
+
+        @media (max-width: 968px) {
+            .hero, .about, .contact { grid-template-columns: 1fr; text-align: center; }
+            .nav-links { display: none; }
+            .hero-text h1 { font-size: 36px; }
+            .social-flex { justify-content: center; }
+            .logo{ font-size: auto; }
+           nav .btn-portal{display: none;}
+        }
+    </style>
+</head>
+<body>
+<div id="user-welcome-banner" style="display: none; background: #4f46e5; color: white; padding: 10px 6%; border-bottom: 2px solid rgba(255,255,255,0.1);">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span id="welcome-text" style="font-weight: 600; font-size: 14px;"></span>
+        <button onclick="logout()" style="background: #ef4444; color: white; border: none; padding: 5px 15px; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 12px; transition: 0.3s;">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </div>
+</div>
+ <!-- Notification Modal -->
+<div id="notice-modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="toggleNotice()">&times;</span>
+        <i class="fas fa-bullhorn" style="font-size: 48px; color: var(--accent); margin-bottom: 20px;"></i>
+        
+        <h2 style="margin-bottom: 15px;">Admission Open!</h2>
+        <p>Enrollment for the Academic Session 2083 is now open. Join the NPA family today.</p>
+        
+        <!-- Updated Achievement Button -->
+        <button class="btn-portal" 
+                style="margin-top: 25px; width: 100%;" 
+                onclick="window.location.href='see.html'">
+            See Batch 2082 Achievements
+        </button>
+    </div>
+</div>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo-group">
+            <div class="logo"><img src="logo.jpg" alt="logo"> NORTH POINT aCADEMY</div></div>
+           
+        <div class="nav-links">
+            <a href="#home"><i class="fas fa-house"></i> Home</a>
+            <a href="#about"><i class="fas fa-circle-info"></i> About</a>
+            <a href="#dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a>
+            <a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a>
+        </div>
+      <a href="https://system.eacademynepal.com/" id="nav-login-btn" target="_blank" class="btn-portal"></a>    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <h1>Welcome to <span>Our school</span> for a Brighter Future</h1>
+            <p>Empowering students with 21st-century skills and moral values in a modern learning environment.</p>
+            <div style="display: flex; gap: 15px;">
+                <a href="#" class="btn-portal" style="padding: 15px 35px;">Staffs</a>
+                <a href="#" class="btn-portal" style="background: var(--white); color: var(--primary); padding: 15px 35px;">Students</a>
+            </div>
+        </div>
+        <div>
+            <img src="school.jpg" class="hero-img" alt="northpointacademy">
+        </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section class="dashboard" id="dashboard">
+        <div class="stat-card">
+            <img src="student.jpg" alt="Students">
+            <div class="stat-info">
+                <i class="fas fa-user-graduate"></i>
+                <h3>500+</h3>
+                <p>Students</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <img src="https://images.unsplash.com/photo-1544531585-9847b68c8c86?auto=format&fit=crop&w=600" alt="Teachers">
+            <div class="stat-info">
+                <i class="fas fa-chalkboard-user"></i>
+                <h3>27</h3>
+                <p>Teachers</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <img src="staff.jpg" alt="Awards">
+            <div class="stat-info">
+                <i class="fas fa-award"></i>
+                <h3>35+</h3>
+                <p>Staff Members</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-image-stack">
+            <img src="schooll.jpg" class="about-main-img" alt="Academic Excellence">
+            <div class="about-badge">
+                <h4 style="color: var(--primary); font-size: 24px;">25+</h4>
+                <p style="font-size: 12px; font-weight: 700;">Years of Legacy</p>
+            </div>
+        </div>
+        <div>
+            <h2 style="font-size: 36px; color: var(--dark); margin-bottom: 20px;">Why NORTH POINT ACADEMY?</h2>
+            <p style="margin-bottom: 20px; color: #64748b;">Established in 1995, we have been a pioneer in quality education. Our curriculum blends academic rigor with practical exposure to ensure students are ready for the world.</p>
+            <ul style="list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <li><i class="fas fa-check-circle" style="color: var(--success);"></i> Smart Classrooms</li>
+                <li><i class="fas fa-check-circle" style="color: var(--success);"></i> STEM Education</li>
+                <li><i class="fas fa-check-circle" style="color: var(--success);"></i> Sports Academy</li>
+                <li><i class="fas fa-check-circle" style="color: var(--success);"></i> Transportation</li>
+            </ul>
+        </div>
+    </section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials" style="padding: 80px 6%; background: #f1f5f9;">
+    <div style="text-align: center; margin-bottom: 50px;">
+        <h2 style="font-size: 36px; color: var(--dark);">What Our Parents & Students Say</h2>
+        <p style="color: #64748b;">Feedback from our wonderful community.</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        <!-- Card 1 -->
+        <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); position: relative;">
+            <i class="fas fa-quote-left" style="font-size: 30px; color: var(--secondary); opacity: 0.2; position: absolute; top: 20px; left: 20px;"></i>
+            <p style="font-style: italic; margin-bottom: 20px; color: #475569;">"North Point Academy provides an excellent environment for growth. My daughter has improved significantly in her confidence and academic skills."</p>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">RK</div>
+                <div>
+                    <h4 style="color: var(--dark); font-size: 16px;">Ram Kumar Thapa</h4>
+                    <p style="font-size: 13px; color: #94a3b8;">Parent</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); position: relative;">
+            <i class="fas fa-quote-left" style="font-size: 30px; color: var(--secondary); opacity: 0.2; position: absolute; top: 20px; left: 20px;"></i>
+            <p style="font-style: italic; margin-bottom: 20px; color: #475569;">"The teachers here are very supportive. The smart classrooms and STEM activities make learning really fun and easy to understand."</p>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--dark); font-weight: bold;">SA</div>
+                <div>
+                    <h4 style="color: var(--dark); font-size: 16px;">Sita Aryal</h4>
+                    <p style="font-size: 13px; color: #94a3b8;">Grade 10 Student</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section -->
+<section class="contact" id="contact">
+    <div>
+        <h2 style="font-size: 36px; margin-bottom: 15px;">Get In Touch</h2>
+        <p style="color: #64748b; margin-bottom: 25px;">Have questions? Reach out to us or follow our social channels for updates[cite: 1].</p>
+        
+        <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
+            <i class="fas fa-location-dot" style="color: var(--primary);"></i>
+            <span>Buddhabhumi-1, Pattharkot, Kapilvastu, Nepal</span>
+        </div>
+        <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
+            <i class="fas fa-phone" style="color: var(--primary);"></i>
+            <span>+977-1-4XXXXXX</span>
+        </div>
+
+        <div class="social-flex">
+            <a href="#" class="social-circle wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-circle fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-circle tt" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            <!-- Instagram replaced by YouTube -->
+            <a href="#" class="social-circle yt" title="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+    <div style="background: #f8fafc; padding: 40px; border-radius: 30px;">
+        <form style="display: grid; gap: 15px;">
+            <input type="text" placeholder="Your Name" style="padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0;">
+            <input type="email" placeholder="Email Address" style="padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0;">
+            <textarea placeholder="Your Message" style="padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0; height: 120px;"></textarea>
+            <button type="submit" class="btn-portal" style="padding: 15px; cursor: pointer;">Send Message</button>
+        </form>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-grid">
+        <!-- Developer Info -->
+        <div class="footer-col">
+            <h4><i class="fas fa-code"></i> MR. BIJAY KHANAL</h4>
+            <p>Website Developer</p>
+            <div class="social-icons">
+                <a href="#" style="color: inherit; margin-right: 10px;"><i class="fab fa-facebook"></i></a>
+                <a href="#" style="color: inherit;"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+            <h4><i class="fas fa-link"></i> Quick Links</h4>
+            <p><a href="#home" style="color: inherit; text-decoration: none;"><i class="fas fa-sign-in-alt"></i> Member Login</a></p>
+            <p><a href="#home" style="color: inherit; text-decoration: none;"><i class="fas fa-users-gear"></i> Staffs</a></p>
+            <p><a href="#home" style="color: inherit; text-decoration: none;"><i class="fas fa-user-graduate"></i> Students</a></p>
+        </div>
+
+        <!-- School Info -->
+        <div class="footer-col">
+            <h4><img src="logo.jpg" alt="npa" width="30"> NORTH POINT ACADEMY</h4>
+            <p><i class="fas fa-map-marker-alt"></i> Buddhabhumi-1, Pattharkot, Kapilvastu</p>
+            <p><i class="fas fa-calendar-check"></i> Estd.: 2054</p>
+        </div>
+
+        <!-- Principal Info -->
+        <div class="footer-col">
+            <h4><i class="fas fa-user-tie"></i> MR. HARI PRASAD BELBASE</h4>
+            <p>Principal</p>
+            <p><i class="fas fa-phone"></i> Contact Info</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px;">
+        &copy; 2026 Bijay Khanal. All Rights Reserved.
+    </div>
+</footer>
+
+    <script>
+        // 1. Function to handle the Welcome Banner
+function handleUserSession() {
+    const userName = sessionStorage.getItem('loggedInUser');
+    const welcomeBanner = document.getElementById('user-welcome-banner');
+    const welcomeText = document.getElementById('welcome-text');
+    const loginBtn = document.getElementById('nav-login-btn');
+
+    if (userName) {
+        // Show the banner and set the specific user's name
+        welcomeBanner.style.display = 'block';
+        welcomeText.innerHTML = `<i class="fas fa-user-check"></i> Welcome back, <strong>${userName}</strong>! You are logged into the NPA Portal.`;
+        
+        // Update the button text, but REMOVE the #dashboard link logic
+        if(loginBtn) {
+            loginBtn.innerHTML = '<i class="fas fa-user-circle"></i> Member Login';
+            // Keeping the original eAcademy URL instead of linking to #dashboard
+            loginBtn.href = "https://system.eacademynepal.com/"; 
+        }
+    }
+}
+
+// 2. Logout remains the same
+function logout() {
+    sessionStorage.removeItem('loggedInUser');
+    sessionStorage.removeItem('noticeShown'); 
+    window.location.reload(); 
+}
+
+// 3. Notice and Init logic remains the same
+function toggleNotice() {
+    const modal = document.getElementById('notice-modal');
+    if (modal) { modal.classList.toggle('active'); }
+}
+
+window.onload = () => {
+    handleUserSession();
+    const isNoticeShown = sessionStorage.getItem('noticeShown');
+    if (!isNoticeShown) {
+        setTimeout(() => {
+            toggleNotice();
+            sessionStorage.setItem('noticeShown', 'true');
+        }, 2000);
+    }
+};
+
+// Select the buttons for closing the modal
+document.querySelector('#notice-modal .btn-portal').onclick = toggleNotice;
+document.querySelector('.close-btn').onclick = toggleNotice;
+  </script>
+    <script src="studentdata.js"></script>
+    <script src="staff.js"></script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>North Point Academy - Academic Excellence</title>
+    <link rel="icon" type="image" href="logo.jpg">
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --accent-color: #f59e0b;
+            --bg-color: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Toolbar for Navigation */
+        .toolbar {
+            width: 100%;
+            max-width: 1300px;
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .btn-back {
+            padding: 8px 20px;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: #1e293b;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            background: linear-gradient(180deg, #fff9e6 0%, #ffffff 150px);
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 22pt;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        .nepali-motto {
+            font-weight: bold;
+            color: #fff;
+            padding: 5px 25px;
+            background-color: #e11d48;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 10pt;
+        }
+
+        .wishes-line {
+            text-align: center;
+            font-size: 12pt;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px dashed #cbd5e1;
+            background: #fff;
+            line-height: 1.6;
+        }
+
+        /* 9 Column Grid */
+        #student-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 8px;
+        }
+
+        .card {
+            position: relative;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 5px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .rank {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: var(--accent-color);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        .img-container {
+            width: 70px;
+            height: 70px;
+            margin: 5px auto 10px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            overflow: hidden;
+            background: #f8fafc;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 8pt;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.2;
+        }
+
+        .gpa-box {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 9pt;
+        }
+
+        /* Responsive Grid for Tablets/Mobiles */
+        @media (max-width: 1100px) { #student-grid { grid-template-columns: repeat(6, 1fr); } }
+        @media (max-width: 800px) { #student-grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (max-width: 500px) { #student-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body>
+
+<div class="toolbar">
+    <!-- Corrected Back Button -->
+    <button onclick="window.history.back()" class="btn-back">← Back</button>
+</div>
+
+<div class="container">
+    <header>
+        <h1 style="display: flex;justify-content: center; align-items: center;">
+            <img src="logo.jpg" alt="logo" style="width: 50px; border-radius: 50%;">North Point Academy</h1>
+        <p style="margin:5px 0; color: #475569;">Buddhabhumi-1, Pattharkot, Kapilvastu | Estd.: 2054</p>
+        <div class="nepali-motto">"गुणस्तरीय शिक्षा हाम्रो प्रतिबद्धता"</div>
+    </header>
+
+    <div class="wishes-line">
+        विगतको मेहेनत र लगनशीलताको प्रतिफल स्वरूप एस.इ.इ. (SEE) २०८२ को परीक्षामा सफलता हासिल गरी विद्यालयको गरिमा बढाउन सफल हुनुभएकोमा सम्पूर्ण विद्यार्थी भाइबहिनीहरूलाई हार्दिक बधाई! आगामी दिनहरूमा पनि तपाईंहरूको शैक्षिक यात्रा अझै उच्च र सफल रहोस् भन्ने कामना गर्दछौं।
+    </div>
+
+    <div id="student-grid"></div>
+</div>
+
+<script>
+    const students = [
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/moOyU0bzifetxkUbZJNnUgZFylZ3J2QAMRGhMvfv.jpg", name: "Mr. Elesh Pandey", GPA: "3.77" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/Djn41JQaDgGifa8UUVAcQL9K34JtRXkn0MC50fUC.jpg", name: "Mr. Rijan Kandel", GPA: "3.67" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/w89oUenZNUU2KzUGQvIzxciD0RKpLfP58miRKHGx.jpg", name: "Mr. Rijan Rayamajhi", GPA: "3.57" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/SgGsUumRsk9WhWIrgjcTktWEVYTSDUavrsrcC2vc.jpg", name: "Mr. Rojan Thapa", GPA: "3.55" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/jqmD02OG5c42xQ7ffX8xmQziRueJKCzKtjA327wf.jpg", name: "Mr. Bhuwan Nepali", GPA: "3.54" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/febT5vKU9csEByWzk4TFF5igF5x1QxIJLqrGq3x2.jpg", name: "Mr. Bibek Shrestha", GPA: "3.53" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/B9oz7esFFHLKHJkrWDjzQAReD8FDIivxgBcWJqNv.jpg", name: "Miss. Prakriti Bhattarai", GPA: "3.51" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/9QVhyh6853G3RYTZ3QxxkzMs94Q45ScNRvtiiSww.jpg", name: "Mr. Madhav Khanal Chhetri", GPA: "3.50" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/cNXBnHzGrE6VH6R7YsHBMsD3qy8K8nNOYjyFRlmf.jpg", name: "Mr. Rishab Thapa", GPA: "3.50" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/FsGJYyFMKg8GLZpifodSqfA4Qb4HdyZV6KDIQ4zV.jpg", name: "Miss. Anamika Basnet", GPA: "3.40" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/55WynVhlR7XZzpPb0sjFw9nePc4UAymQ18hRAOQ4.jpg", name: "Miss. Bipshika Adhikari", GPA: "3.37" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/VOa0kHjx7ivBOkd0b8KHvfliVDvUcpi0cgMfOTts.jpg", name: "Mr. Abiral Bhusal", GPA: "3.35" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/n3Bqulk9TO21l8V8Lx7dFhqPs52sb6lAaxFeoTDQ.jpg", name: "Miss. Bipasna Poudel", GPA: "3.33" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/tKst5i35L1ilX2QiosPp25u8hh9EEvo76IfIrB31.jpg", name: "Miss. Shristi Poudel", GPA: "3.32" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/MWE1lUbtA0hWb5pePXfCFAWhpOkkIykhtMq7OwiK.jpg", name: "Mr. Bikash Somai Magar", GPA: "3.27" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/4qcRPDs54w42vtzSFOZyX3VJEo7WFLvGtrMcYNze.jpg", name: "Miss. Sumitra Belbase", GPA: "3.25" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/o2w2PgfqV3GbHAnG5Gt1730tYA1QIcVlFsLmyXgU.jpg", name: "Mr. Mohammad Arif Dhobi", GPA: "3.18" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/QAgF2buIv9xCeRkXuGWFQA2ab9PJzz9HECeYhsNQ.jpg", name: "Mr. Mohammad Shahid Musalman", GPA: "3.18" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/SumuqHY7wxbuLT8uVhzrWgjr3NLVecXZV6M1PEvV.jpg", name: "Miss. Narmada Poudel", GPA: "2.98" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/RA9L1WIusss5LDeUqT2yzfUCslj5OWeELg91bCpp.jpg", name: "Mr. Asfak Mohammad Dhobi", GPA: "2.94" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/uMkDtQYQ90Tqbb5Si3t1EhA6embdahgQUlaQP6ex.jpg", name: "Mr. Abdulla Adnan", GPA: "2.93" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/RUtXAUxmrAg4lv1LcZJM4hJA2t67CwOwhka79mjk.jpg", name: "Mr. Anmol Gurung", GPA: "2.80" },
+        { image: "https://eacademy.sgp1.digitaloceanspaces.com/eacademy/14/Kmxur3s9ojEC5VNm4SPQi4xraecC5pVwaIf7UDId.jpg", name: "Mr. Nischal Khadka Chhetri", GPA: "2.75" }
+    ];
+
+    const grid = document.getElementById('student-grid');
+
+    students.forEach((s, index) => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.innerHTML = `
+            <div class="rank">#${index + 1}</div>
+            <div class="img-container">
+                <img src="${s.image}" alt="Student" onerror="this.src='https://via.placeholder.com/100?text=No+Image'">
+            </div>
+            <div class="name">${s.name}</div>
+            <div class="gpa-box">${s.GPA}</div>
+        `;
+        grid.appendChild(div);
+    });
+</script>
+
+</body>
+</html>
